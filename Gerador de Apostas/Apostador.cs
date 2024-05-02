@@ -14,7 +14,9 @@
         public void Apostar(int QtdNumeros, int QtdApostas)
         {            
             try
-            {
+            {                
+                //Quantidade mínima de apostas é de 6 numeros e máximo de 100
+                //No mínimo um jogo e nó máximo 15 
                 if ((QtdNumeros >= 6 && QtdNumeros <= 100) && (QtdApostas <= 15 && QtdApostas > 0))
                 {
                     Apostas = new int[QtdApostas][];
@@ -42,6 +44,7 @@
                 Console.WriteLine(ex.Message);
             }
         }
+        //Verifica se o array já possui o numero atual
         private bool NumeroJaExisteNaLinha(int[] linha, int NumeroAtual)
         {
             int numeroAtualAvaliado = linha[NumeroAtual];            

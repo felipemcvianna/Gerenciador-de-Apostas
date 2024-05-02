@@ -10,7 +10,7 @@ namespace Gerador_de_Apostas
 {
     public class AdmApostas : Administrador
     {
-        public string Nome { get; } = "Loteria Federal";
+        public string Nome { get; } = "MEGA SENA";
         public Sorteio Sorteios { get; set; }
         public HashSet<Apostador> Apostadores { get; set; } = new HashSet<Apostador>();
         public HashSet<Apostador> Quadra { get; set; } = new HashSet<Apostador>();
@@ -19,6 +19,7 @@ namespace Gerador_de_Apostas
 
         private void Resultado()
         {
+            //Limpar todos os ganhadores anteriores
             Quadra.Clear();
             Quina.Clear();
             Sena.Clear();
@@ -27,25 +28,39 @@ namespace Gerador_de_Apostas
             {
                 foreach (var apostador in Apostadores)
                 {
+                    //Verificando todas as apostas dos apostadores
                     apostador.JogosVencedores = new int[apostador.Apostas.Length][];
-                    for (int i = 0; i < apostador.Apostas.Length; i++)
+                    for (int linha = 0; linha < apostador.Apostas.Length; linha++)
                     {
                         int acertos = 0;
-                        for (int j = 0; j < apostador.Apostas[i].Length; j++)
+                        for (int coluna = 0; coluna < apostador.Apostas[linha].Length; coluna++)
                         {
-                            if (Sorteios.NumerosSorteados.Contains(apostador.Apostas[i][j]))
+                            //Verifica se o array de numeros sorteador possui o numero apostado na linha e coluna correspondente
+                            if (Sorteios.NumerosSorteados.Contains(apostador.Apostas[linha][coluna]))
                             {
+                                //intera a quantidade de acertos do apostador
                                 acertos++;
                             }
                         }
-                        if (acertos == 4) { apostador.JogosVencedores[i] = apostador.Apostas[i]; Quadra.Add(apostador); }
-                        else if (acertos == 5) { apostador.JogosVencedores[i] = apostador.Apostas[i]; Quina.Add(apostador); }
-                        else if (acertos == 6) { apostador.JogosVencedores[i] = apostador.Apostas[i]; Sena.Add(apostador); }
+                        //Verifica a quantidade de acertos de cada jogo
+                        //O jogo vencedor é adicionado a matriz de jogos vencedores
+                        if (acertos == 4)
+                        {
+                            apostador.JogosVencedores[linha] = apostador.Apostas[linha]; Quadra.Add(apostador);
+                        }
+                        else if (acertos == 5)
+                        {
+                            apostador.JogosVencedores[linha] = apostador.Apostas[linha]; Quina.Add(apostador);
+                        }
+                        else if (acertos == 6)
+                        {
+                            apostador.JogosVencedores[linha] = apostador.Apostas[linha]; Sena.Add(apostador);
+                        }
                     }
                 }
             }
-
         }
+        //Metodo para mostrar os numeros sorteados e ganhadores
         public void Vencedores()
         {
             Resultado();
@@ -86,7 +101,7 @@ namespace Gerador_de_Apostas
                 Console.WriteLine(apostadores.Nome);
                 Console.WriteLine(linha);
             }
-            
+
         }
         private void GanhadoresQuina()
         {
@@ -112,7 +127,7 @@ namespace Gerador_de_Apostas
                 Console.WriteLine(apostadores.Nome);
                 Console.WriteLine(linha);
             }
-            
+
         }
     }
 }

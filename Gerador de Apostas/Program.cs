@@ -8,7 +8,7 @@ namespace Gerador_de_Apostas
         {
             AdmApostas admApostas = new AdmApostas();
             Sorteio s = new(admApostas);
-            Apostador felipe = new("Felipe", admApostas);
+            Apostador felipe = new("Felipe", admApostas);            
             admApostas.Vencedores();
         }
     }

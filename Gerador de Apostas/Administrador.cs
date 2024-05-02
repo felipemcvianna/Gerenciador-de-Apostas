@@ -12,5 +12,6 @@ namespace Gerador_de_Apostas
         public HashSet<Apostador> Apostadores { get; set; }        
         public void RegistrarApostador(Apostador Apostador);
         public void RegistrarSorteio(Sorteio Sorteio);
+        public void Vencedores();
     }
 }

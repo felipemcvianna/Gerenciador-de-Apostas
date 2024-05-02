@@ -27,15 +27,16 @@
             adm.RegistrarSorteio(this);
             Sortear();
         }
+        //Sorteia 6 numeros entre 0 e 100
         public void Sortear()
         {
+            var random = new Random();
             for (int i = 0; i < QtdSorteio; i++)
             {
                 int numero;
-                var random = new Random();
                 do
                 {
-                    numero = random.Next(0, 100);
+                    numero = random.Next(0, 101);
                 } while (NumerosSorteados.Contains(numero));
                 NumerosSorteados[i] = numero;
             }
